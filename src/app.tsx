@@ -11,9 +11,38 @@ import type { Note as TNote } from './components/note-card'
 import { Search } from './components/search'
 
 export function App() {
-	const [notes] = useState<TNote[]>([
-		{ id:'shaiGWBF8137', created_at: new Date(), content: 'Hellp, my mussarellos'}
-	])
+	const [notes, setNotes] = useState<TNote[]>(()=>{
+		const storedNotes = localStorage.getItem('notes@v1.0')
+		if (!!storedNotes) return JSON.parse(storedNotes)
+		return []
+	})
+
+	const handleCreateNote = (note: string) => {
+		const now = new Date()
+		const newNote:TNote = {
+			id: `note-${now.getMilliseconds()}`,
+			content: note,
+			created_at: now
+		}
+
+		const updated = [newNote, ...notes]
+		setNotes(updated)
+
+		localStorage.setItem(
+			'notes@v1.0',
+			JSON.stringify(updated)
+		)
+	}
+
+	const handleDeleteNote = (id: string) => {
+		const updated = notes.filter(note => note.id!==id)
+		setNotes(updated)
+
+		localStorage.setItem(
+			'notes@v1.0',
+			JSON.stringify(updated)
+		)
+	}
 
 	return (
 		<div className="w-screen max-w-[1092px] flex flex-col gap-10 items-start p-5">
@@ -24,10 +53,14 @@ export function App() {
 			<hr className="w-full h-0.25 bg-slate-700"/>
 
 			<div className="w-full grid grid-cols-1 md:grid-cols-2 lg:gris-cols-3 gap-3 auto-rows-[250px]">	
-			  <NewNote />
+			  <NewNote onCreateNote={handleCreateNote} />
 
 				{ notes.map(note => (
-					<Note id={note.id} note={note} />
+					<Note
+					  id={note.id}
+						note={note}
+						onDeleteNote={handleDeleteNote}
+					/>
 				)) }
 			</div>
 		</div>
