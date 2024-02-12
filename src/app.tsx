@@ -5,9 +5,9 @@
 import logo from './assets/logo.svg'
 
 import { useState } from "react"
-import { NewNote } from './components/new-note-card'
-import { Note } from './components/note-card'
-import type { Note as TNote } from './components/note-card'
+import { NewNote } from './components/notes/new-note-card'
+import { Note } from './components/notes/note-card'
+import type { Note as TNote } from './components/notes/note-card'
 import { Search } from './components/search'
 
 export function App() {
@@ -45,7 +45,7 @@ export function App() {
 	}
 
 	return (
-		<div className="w-screen max-w-[1092px] flex flex-col gap-10 items-start p-5">
+		<div className="w-screen max-w-[1092px] min-h-screen flex flex-col gap-10 items-start p-5">
 		  <img src={logo} className="h-6 w-auto smax:mx-auto" alt="nlw-expert-notexpert" />
 
 			<Search onSearch={console.log} />
