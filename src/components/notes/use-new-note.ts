@@ -14,11 +14,11 @@ export function useNewNote() {
 		setIsTyping(typing => !typing)
 	}
 
-	const handleChange = (event:OnChange) => {
-		if (!event.target.value.length) {
-			setIsTyping(false)
-		}
+	const reset = () => {
+		setNote('')
+	}
 
+	const handleChange = (event:OnChange) => {
 		setNote(event.target.value)
 	}
 
@@ -31,7 +31,7 @@ export function useNewNote() {
 		}
 
 		onNoteCreated(note)
-		setNote('')
+		reset()
 		setIsTyping(false)
 		toast.success('Note Created')
 	}
@@ -87,6 +87,7 @@ export function useNewNote() {
 		note,
 		isTyping,
 		isRecording,
+		reset,
 		handleChange,
 		toggleTyping,
 		handleCreateNote,
