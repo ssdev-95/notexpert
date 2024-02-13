@@ -40,35 +40,42 @@ export function useNewNote() {
 
 	const startRecordingNote = () => {
 		console.clear()
+
+		const isSpeechRecognitionAvailable = 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window
 	
-		const isSpeechAvailable = ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)
-		if (!isSpeechAvailable) {
-			toast.error('Audio Not Available [FAIL]')
+		if (!isSpeechRecognitionAvailable) {
+			toast.error('Audio Not Available')
 			return;
 		}
 
-		setIsRecording(true)
+		const RecognitionAPI = window.webkitSpeechRecognition || window.SpeechRecognition
 
-		const RecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
 		recognitionAPI = new RecognitionAPI()
+
+		if (recognitionAPI === null) {
+			toast.error('Audio Not Available')
+			return
+		}
+
+		setIsRecording(true)
 		recognitionAPI.continuous = true
+		recognitionAPI.lang = 'pt-Br'
 		recognitionAPI.interimResults = false
 		recognitionAPI.maxAlternatives = 1
-		recognitionAPI.start()
 
 		recognitionAPI.onresult =	(event) => {
-			let speech = []
+			const speech = Array.from(event.results).reduce((text, result)=>{
+				return `${text} ${result[0].transcript}`
+			}, '')
 
-			for(let i=0; i<event.results.length; i++) {
-				speech.push(event.results[i][0])
-			}
-
-			setNote(speech.join(' '))
+			setNote(speech)
 		}
 	
 		recognitionAPI.onerror = (event) => {
-			console.debug(event.error)
+			console.error(event.error)
 		}
+
+		recognitionAPI.start()
 	}
 
 	const stopRecordingNote = () => {
