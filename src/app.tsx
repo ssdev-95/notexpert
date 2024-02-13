@@ -28,27 +28,31 @@ export function App() {
 		const updated = [newNote, ...notes]
 		setNotes(updated)
 
-		localStorage.setItem(
-			'notes@v1.0',
-			JSON.stringify(updated)
-		)
+		localStorage.setItem('notes@v1.0', JSON.stringify(updated))
 	}
 
 	const handleDeleteNote = (id: string) => {
 		const updated = notes.filter(note => note.id!==id)
 		setNotes(updated)
 
-		localStorage.setItem(
-			'notes@v1.0',
-			JSON.stringify(updated)
-		)
+		localStorage.setItem('notes@v1.0', JSON.stringify(updated))
+	}
+
+	const handleSearch = (query:string) => {
+		const stored = localStorage.getItem('notes@v1.0')
+		if (!stored) return;
+
+		const parsed:Note[] = JSON.parse(stored)
+		const filter = parsed.filter(note => note.content.includes(query))
+
+		setNotes(filter)
 	}
 
 	return (
 		<div className="w-screen max-w-[1092px] min-h-screen flex flex-col gap-10 items-start p-5">
 		  <img src={logo} className="h-6 w-auto smax:mx-auto" alt="nlw-expert-notexpert" />
 
-			<Search onSearch={console.log} />
+			<Search onSearch={handleSearch} />
 
 			<hr className="w-full h-0.25 bg-slate-700"/>
 
@@ -57,7 +61,7 @@ export function App() {
 
 				{ notes.map(note => (
 					<Note
-					  id={note.id}
+					  key={note.id}
 						note={note}
 						onDeleteNote={handleDeleteNote}
 					/>
