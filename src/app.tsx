@@ -10,9 +10,11 @@ import { Note } from './components/notes/note-card'
 import type { Note as TNote } from './components/notes/note-card'
 import { Search } from './components/search'
 
+const store_versioning = `notes@${import.meta.env.VITE_APP_VERSION}`
+
 export function App() {
 	const [notes, setNotes] = useState<TNote[]>(()=>{
-		const storedNotes = localStorage.getItem('notes@v1.0')
+		const storedNotes = localStorage.getItem(store_versioning)
 		if (!!storedNotes) return JSON.parse(storedNotes)
 		return []
 	})
@@ -28,18 +30,18 @@ export function App() {
 		const updated = [newNote, ...notes]
 		setNotes(updated)
 
-		localStorage.setItem('notes@v1.0', JSON.stringify(updated))
+		localStorage.setItem(store_versioning, JSON.stringify(updated))
 	}
 
 	const handleDeleteNote = (id: string) => {
 		const updated = notes.filter(note => note.id!==id)
 		setNotes(updated)
 
-		localStorage.setItem('notes@v1.0', JSON.stringify(updated))
+		localStorage.setItem(store_versioning, JSON.stringify(updated))
 	}
 
 	const handleSearch = (query:string) => {
-		const stored = localStorage.getItem('notes@v1.0')
+		const stored = localStorage.getItem(store_versioning)
 		if (!stored) return;
 
 		const parsed:Note[] = JSON.parse(stored)

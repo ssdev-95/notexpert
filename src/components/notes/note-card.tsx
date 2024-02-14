@@ -33,7 +33,9 @@ export function Note({ note, onDeleteNote }: NoteProps) {
 		>
 		  <div className="w-full h-full flex flex-col">
 			  <div className="w-full flex-1 flex flex-col gap-3 p-2">
-    		  <strong className="text-slate-200">Note</strong>
+    		  <strong className="text-slate-200">
+					  Note <span className="font-normal text-xs text-slate-500">({time})</span>
+					</strong>
     			<p className="text-slate-400">{note.content}</p>
   			</div>
   
