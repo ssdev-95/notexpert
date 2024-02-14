@@ -1,9 +1,9 @@
 /** NLW Expert **/
 
-import * as Dialog  from "@radix-ui/react-dialog"
-import { ArrowUpRight, AlertOctagon, X } from "lucide-react"
+import { AlertOctagon } from "lucide-react"
 import { toast } from "sonner"
 import { getDistance } from "../../utils/time"
+import { NoteActionModal } from "./note-action-modal"
 
 export type Note = {
 	id: string
@@ -24,41 +24,27 @@ export function Note({ note, onDeleteNote }: NoteProps) {
 	}
 
 	return (
-		<Dialog.Root>
-  		<Dialog.Trigger className="relative rounded-tr-lg overflow-hidden bg-slate-800 ring-2 ring-slate-600 focus-visible:ring-lime-400 hover:ring-slate-400 active:ring-lime-400">
-  		  <div className="absolute top-0 right-0 h-10 w-10 bg-slate-600 flex items-center justify-center">
-  			  <ArrowUpRight className="text-lg text-slate-400" />
+		<NoteActionModal
+		  shadow
+		  header={time}
+			body={note.content}
+			icon="arrow"
+			className="relative rounded-tr-lg overflow-hidden bg-slate-800 ring-2 ring-slate-600 focus-visible:ring-lime-400 hover:ring-slate-400 active:ring-lime-400"
+		>
+		  <div className="w-full h-full flex flex-col">
+			  <div className="w-full flex-1 flex flex-col gap-3 p-2">
+    		  <strong className="text-slate-200">Note</strong>
+    			<p className="text-slate-400">{note.content}</p>
   			</div>
-
-  		  <div className="w-full h-full p-4 flex flex-col text-left gap-5 text-sm relative">
-  		    <span className="text-slate-200">{time}</span>
-  				<p className="text-slate-400">{note.content}</p>
-  				<div className="w-full h-3/5 bg-gradient-to-t from-black to-black/40 fixed bottom-0 left-0" />
-  			</div>
-  		</Dialog.Trigger>
-
-		  <Dialog.Portal>
-			  <Dialog.Overlay className="w-screen h-screen absolute top-0 left-0 bg-black/60 flex items-center justify-center">
-
-  				<Dialog.Content className="w-[640px] max-w-[80vw] h-[600px] max-h-screen z-10 flex flex-col bg-slate-700 overflow-hidden relative rounded-tr-lg">
-					  <div className="w-full flex-1 flex flex-col gap-2 justify-start p-3">
-  					  <strong className="text-slate-200">{time}</strong>
-  						<p className="text-slate-400">{note.content}</p>
-						</div>
-						<button
-    				  className="w-full h-12 flex items-center justify-center gap-4 bg-slate-800 text-red-500 hover:bg-slate-500 active:bg-slate-500 focus-visible:ring-2 focus-visible:ring-slate-800"
-							onClick={handleDeleteNote}
-						>
-    				  <AlertOctagon className="text-lg" />
-      				Delete this note?
-    				</button>
-
-						<Dialog.Close className="absolute top-0 right-0 h-10 w-10 bg-slate-800 text-slate-700 flex items-center justify-center">
-						  <X />
-						</Dialog.Close>
-  			  </Dialog.Content>
-				</Dialog.Overlay>
-			</Dialog.Portal>
-		</Dialog.Root>
+  
+				<button
+  			  onClick={handleDeleteNote}
+  				className="w-full h-12 flex items-center justify-center gap-2 bg-slate-800 text-red-500"
+  			>
+    		  <AlertOctagon />
+  				Delete this note?
+    		</button>
+			</div>
+		</NoteActionModal>
 	)
 }
