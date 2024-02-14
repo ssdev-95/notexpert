@@ -1,30 +1,41 @@
-# React + TypeScript + Vite
+# Notexpert <img height="32" src="./public/favicon.svg" alt="favicon" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+![Notexpert](./public/thumbnail.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+![ReactJS](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black)
+![Typescript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF.svg?style=for-the-badge&logo=Vite&logoColor=white)
+![PWA](https://img.shields.io/badge/PWA-5A0FC8.svg?style=for-the-badge&logo=PWA&logoColor=white)
+![Tailwindcss](https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white)
+![RadixUI](https://img.shields.io/badge/Radix%20UI-161618.svg?style=for-the-badge&logo=Radix-UI&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000.svg?style=for-the-badge&logo=Vercel&logoColor=white)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+&nbsp;&nbsp;&nbsp;&nbsp;*"A notes app powered by SpeechRecognition&trade;"*
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+&nbsp;&nbsp;&nbsp;&nbsp;*"The next generation of note apps. Write (or speak out loud) your notes easily, anytime, anywhere.."*
+
+
+Take a look at the working version [here](https://notexpert.vercel.app).
+
+
+## Use Cases
+
+- [x] Notes can be taken manually or by recording
+- [x] Notes can be persisted locally
+- [ ] Notes can be persisted in a database
+- [x] Persisted notes can be retrieved
+- [x] Notes can be deleted
+- [ ] Notes can be updated
+- [x] PWA support for better user experience
+- [ ] Users can authenticate
+- [x] Responsive
+- [x] Deploy
+
+
+
+
+Layout by [Rocketseat](https://www.rocketseat.com.br)&trade;
